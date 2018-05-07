@@ -25,7 +25,7 @@ public class UserService {
 	}
 
 	public User findOne(Integer id) {
-		return userJpa.getOne(id);
+		return userJpa.findOne(id);
 	}
 
 	@Transactional
