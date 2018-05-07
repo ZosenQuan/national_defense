@@ -4,3 +4,5 @@ spring:
     url: jdbc:mysql://101.201.68.110:3306/zosen
     username: root
     password: mariadb
+  jpa:
+    show-sql: true

@@ -1,51 +1,45 @@
 package com.zosen.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
-@Table(name="tb_user")
-public class User {
-	
-	/**
-	 * 用户id
-	 */
+@Table(name = "tb_user")
+@ApiModel("用户")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -7108462934267007046L;
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty("用户id")
 	private Integer id;
-	
-	/**
-	 * 用户名
-	 */
-	@Column
+
+	@ApiModelProperty("用户名")
 	private String userName;
-	
-	/**
-	 * 用户密码
-	 */
-	@Column
+
+	@JsonIgnore
+	@ApiModelProperty("用户密码")
 	private String password;
-	
-	/**
-	 * 手机号
-	 */
-	@Column
+
+	@ApiModelProperty("手机号")
 	private String phoneNumber;
-	
-	/**
-	 * 年龄
-	 */
-	@Column
+
+	@ApiModelProperty("年龄")
 	private Integer age;
-	
-	/**
-	 * 喜好
-	 */
-	@Column
-	private String like;
+
+	@ApiModelProperty("喜好")
+	private String hobby;
 
 	public Integer getId() {
 		return id;
@@ -87,21 +81,21 @@ public class User {
 		this.age = age;
 	}
 
-	public String getLike() {
-		return like;
+	public String getHobby() {
+		return hobby;
 	}
 
-	public void setLike(String like) {
-		this.like = like;
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + age;
+		result = prime * result + ((age == null) ? 0 : age.hashCode());
+		result = prime * result + ((hobby == null) ? 0 : hobby.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((like == null) ? 0 : like.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
@@ -117,17 +111,20 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (age != other.age)
+		if (age == null) {
+			if (other.age != null)
+				return false;
+		} else if (!age.equals(other.age))
+			return false;
+		if (hobby == null) {
+			if (other.hobby != null)
+				return false;
+		} else if (!hobby.equals(other.hobby))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (like == null) {
-			if (other.like != null)
-				return false;
-		} else if (!like.equals(other.like))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -150,7 +147,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", phoneNumber=" + phoneNumber
-				+ ", age=" + age + ", like=" + like + "]";
+				+ ", age=" + age + ", hobby=" + hobby + "]";
 	}
-	
+
 }
