@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://101.201.68.110:3306/zosen
+    url: jdbc:mysql://101.201.68.110:3306/zosen?characterEncoding=utf-8
     username: root
     password: mariadb
   jpa:

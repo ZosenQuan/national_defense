@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试页</title>
+<style type="text/css">
+form {
+	width: 500px;
+	margin: 0px auto;
+}
+
+.fm {
+	display: block;
+	margin: 10px;
+}
+
+#content {
+	width: 300px;
+	height: 150px;
+	border: 0px;
+	resize: none;
+	font-size: 14px;
+}
+
+#upload_container {
+	height: 100px;
+	list-style: none;
+	padding: 0px;
+}
+
+.upload {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	padding: 0px 0px;
+}
+
+#upload_container li{
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	padding-right: 5px;
+}
+
+#upload_container input{
+	/* opacity: 0; */
+}
+</style>
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#right input").change(function() {
+			var uploadFile = '<li id="left"> <input id="left_inline" name="file" class="upload" type="file"/> <img class="upload" src="" /> </li>';
+			$("#right").before($(uploadFile));
+			$("#left_inline").value = $("#right input").value;
+			$("#left_inline").change(function(e) {
+				//可以做一些其他的事，比如图片预览
+				$(this).removeAttr("id");
+			});
+		});
+	});
+	
+</script>
+</head>
+<body>
+	<form action="/moments/save" method="post">
+		<input name="userId" class="fm" type="text" placeholder="用户ID" />
+		<textarea id="content" name="content" class="fm"
+			placeholder="这一刻的想法..."></textarea>
+		<ul id="upload_container" class="fm">
+			<li id="right">
+				<img class="upload" src="1.jpg" />
+				<input class="upload" type="file"/>
+			</li>
+		</ul>
+		<input type="submit" value="发表" />
+	</form>
+	<hr>
+	<ul>
+	</ul>
+</body>
+</html>
