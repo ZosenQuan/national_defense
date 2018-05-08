@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>测试页</title>
+<title>朋友圈</title>
 <style type="text/css">
 form {
 	width: 500px;
@@ -11,7 +11,7 @@ form {
 
 .fm {
 	display: block;
-	margin: 10px;
+	margin: 10px 0px;
 }
 
 #content {
@@ -23,7 +23,7 @@ form {
 }
 
 #upload_container {
-	height: 100px;
+	min-height: 100px;
 	list-style: none;
 	padding: 0px;
 }
@@ -43,20 +43,21 @@ form {
 }
 
 #upload_container input{
-	/* opacity: 0; */
+	opacity: 0;
 }
 </style>
 <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#right input").change(function() {
-			var uploadFile = '<li id="left"> <input id="left_inline" name="file" class="upload" type="file"/> <img class="upload" src="" /> </li>';
+		$("#right > input").change(function() {
+			var uploadFile = '<li id="left"> <input name="file" class="upload" type="file"/> <img class="upload" src="" /> </li>';
 			$("#right").before($(uploadFile));
-			$("#left_inline").value = $("#right input").value;
-			$("#left_inline").change(function(e) {
-				//可以做一些其他的事，比如图片预览
-				$(this).removeAttr("id");
-			});
+			var r = new FileReader();
+			r.readAsDataURL(this.files[0]);
+			r.onload = function(e){
+				$("#left > img").attr("src", this.result).show();
+				$("#left").removeAttr("id");
+			}
 		});
 	});
 	
@@ -76,7 +77,6 @@ form {
 		<input type="submit" value="发表" />
 	</form>
 	<hr>
-	<ul>
-	</ul>
+	<ul></ul>
 </body>
 </html>
