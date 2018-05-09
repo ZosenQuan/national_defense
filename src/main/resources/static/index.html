@@ -50,13 +50,17 @@ form {
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#right > input").change(function() {
-			var uploadFile = '<li id="left"> <input name="file" class="upload" type="file"/> <img class="upload" src="" /> </li>';
-			$("#right").before($(uploadFile));
-			var r = new FileReader();
-			r.readAsDataURL(this.files[0]);
-			r.onload = function(e){
-				$("#left > img").attr("src", this.result).show();
-				$("#left").removeAttr("id");
+			if(this.files[0]){
+				var uploadFile = '<li id="left"><img class="upload" src="" /></li>';
+				$("#right").before($(uploadFile));
+				var r = new FileReader();
+				r.readAsDataURL(this.files[0]);
+				r.onload = function(e){
+					$("#left > img").attr("src", this.result).show();
+					$("#left").removeAttr("id");
+					$("#right > input").attr("type", "text");
+					$("#right > input").attr("type", "file");
+				}
 			}
 		});
 	});
