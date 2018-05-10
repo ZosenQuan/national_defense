@@ -11,9 +11,9 @@ import javax.persistence.Table;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "tb_moment")
+@Data
 public class Moment implements Serializable {
 
 	private static final long serialVersionUID = 1743464446944566647L;
